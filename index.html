@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- ============================================================
+       Microsoft Clarity Tracking Code (Manual Installation)
+       ============================================================= -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xfypr0w5e4");
+</script>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Grand Food Bazaar Quiz &middot; Find Your Procurement Archetype</title>
+
+  <!-- ============================================================
+       Standardised Font: Google Fonts Import (Poppins)
+       ============================================================ -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* ============================================================
+       Reset & Base Body
+       ============================================================ */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;min-height:100vh;padding:58px 24px 64px;position:relative;overflow-x:hidden;color:#1c1208;background:linear-gradient(160deg,#3a0010 0%,#650e1c 28%,#7d1a1a 52%,#5c0e0e 76%,#350008 100%);background-attachment:fixed}
+
+    /* ============================================================
+       Background: Floating Particle Shapes
+       ============================================================ */
+    .bgs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .bgi{position:absolute;opacity:.042;animation:bgf linear infinite}
+    @keyframes bgf{0%{transform:translateY(110vh) rotate(0)}100%{transform:translateY(-20vh) rotate(360deg)}}
+
+    /* ============================================================
+       Layout: Main App Container
+       ============================================================ */
+    #app{max-width:680px;margin:0 auto;position:relative;z-index:10}
+
+    /* ============================================================
+       Shared Card Container Styles
+       ============================================================ */
+    .card{background:#fff;border-radius:22px;box-shadow:0 4px 14px rgba(0,0,0,.24),0 14px 52px rgba(0,0,0,.3);overflow:hidden;margin-bottom:16px}
+
+    /* ============================================================
+       Static Illustration Area At Top Of Each Card For Scenes
+       ============================================================ */
+    .sw{position:relative;height:272px;overflow:hidden;background:#08001a}
+    .si{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+    .sovl{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 25%,rgba(0,0,0,.65) 100%);pointer-events:none}
+
+    /* ============================================================
+       Question Card: Body Content Area
+       ============================================================ */
+    .qb{padding:18px 28px 24px}
+
+    /* Back button */
+    .back-btn{display:inline-flex;align-items:center;gap:5px;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#800000;background:rgba(128,0,0,.07);border:1.5px solid rgba(128,0,0,.28);border-radius:100px;cursor:pointer;padding:5px 13px 5px 9px;margin-bottom:12px;letter-spacing:.3px;transition:color .15s,background .15s,border-color .15s;line-height:1;-webkit-appearance:none;appearance:none}
+    .back-btn:hover{background:rgba(128,0,0,.14);border-color:rgba(128,0,0,.5);color:#5c0000}
+    .back-btn:hover{color:#800000}
+    .back-btn svg{width:14px;height:14px;flex-shrink:0}
+    .back-btn.hidden{visibility:hidden;pointer-events:none}
+
+    /* Question number label */
+    .qn{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#800000;margin-bottom:5px}
+
+    /* Question text — Poppins 500 at 15px */
+    .qt{font-family:'Poppins',sans-serif;font-size:15px;font-weight:500;line-height:1.58;color:#1c1208;margin-bottom:15px}
+
+    /* ============================================================
+       3D Bubble-style Answer Option Buttons
+       ============================================================ */
+    .os{display:flex;flex-direction:column;gap:10px}
+
+    /* Outer wrapper — purely a hit-target and state container.
+       No filter/shadow here: Safari can paint native button chrome
+       underneath filter on a <button> even with appearance:none,
+       so all visual shadow styling lives on .ob-inner instead. */
+    .ob{
+      display:flex;align-items:center;gap:12px;
+      padding:0;
+      background:transparent;
+      border:none;
+      border-radius:100px;
+      cursor:pointer;
+      text-align:left;
+      font-family:'Poppins',sans-serif;font-size:13px;font-weight:500;color:#3d2b1f;
+      opacity:0;transform:translateY(8px);
+      width:100%;
+      position:relative;
+      -webkit-appearance:none;appearance:none;
+      transition:transform .17s,opacity .3s;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    /* Inner pill — the visible bubble surface.
+       Generous border-radius and soft inset shading give a rounded, cloud-like depth.
+       Subtle top-light and bottom-shade mimic a gentle light source from above. */
+    .ob-inner{
+      display:flex;align-items:center;gap:12px;
+      width:100%;
+      padding:12px 16px;
+      border-radius:100px;
+      background:#ffffff;
+      /* Soft inset: faint top highlight + very gentle bottom shade + hairline edge */
+      box-shadow:
+        inset 0 2px 4px rgba(255,255,255,.9),
+        inset 0 -3px 6px rgba(0,0,0,.04),
+        inset 0 0 0 1px rgba(0,0,0,.05);
+      /* Soft layered drop shadow (moved here from .ob to avoid Safari button-chrome quirk) */
+      filter:drop-shadow(0 3px 0px rgba(0,0,0,.08)) drop-shadow(0 5px 12px rgba(0,0,0,.09));
+      transition:background .17s,box-shadow .17s,filter .17s;
+      position:relative;
+    }
+
+
+    /* Entrance animation — preserves original stagger behaviour */
+    .ob.in{opacity:1;transform:translateY(0)}
+
+    /* Hover: lift up, deepen shadow, warm tint */
+    .ob:hover{
+      transform:translateY(-2px);
+    }
+    .ob:hover .ob-inner{
+      background:#fffdf5;
+      filter:drop-shadow(0 5px 2px rgba(0,0,0,.08)) drop-shadow(0 8px 18px rgba(0,0,0,.11));
+      box-shadow:
+        inset 0 2px 4px rgba(255,255,255,.95),
+        inset 0 -3px 6px rgba(0,0,0,.04),
+        inset 0 0 0 1px rgba(217,119,6,.28);
+    }
+
+    /* Active/press: push down, flatten shadow */
+    .ob:active{
+      transform:translateY(1px);
+    }
+    .ob:active .ob-inner{
+      filter:drop-shadow(0 2px 0px rgba(0,0,0,.12)) drop-shadow(0 3px 8px rgba(0,0,0,.12));
+      box-shadow:
+        inset 0 1px 3px rgba(255,255,255,.8),
+        inset 0 -2px 4px rgba(0,0,0,.04),
+        inset 0 0 0 1px rgba(217,119,6,.22);
+    }
+
+    /* Selected state: warm amber bubble */
+    .ob.sel .ob-inner{
+      background:#fef3c7;
+      filter:drop-shadow(0 3px 0px rgba(180,83,9,.14)) drop-shadow(0 5px 12px rgba(180,83,9,.12));
+      box-shadow:
+        inset 0 2px 4px rgba(255,255,255,.85),
+        inset 0 -3px 6px rgba(180,83,9,.08),
+        inset 0 0 0 1px rgba(217,119,6,.45);
+    }
+
+    /* Option letter label (A/B/C bubble) */
+    .ol{
+      min-width:28px;height:28px;border-radius:50%;
+      background:#eceae3;
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;font-weight:700;letter-spacing:.5px;color:#444441;
+      flex-shrink:0;
+      transition:background .17s,color .17s;
+      position:relative;z-index:1;
+    }
+    .ob.sel .ol{background:#444441;color:#fff}
+
+    /* ============================================================
+       Quiz Introduction Card: Title, Description, Start Button
+       ============================================================ */
+    .ib{padding:32px 31px 36px;text-align:center}
+    .ik{display:inline-block;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#800000;margin-bottom:16px}
+    .it{font-family:'Poppins',sans-serif;font-size:23px;line-height:1.3;color:#1c1208;margin-bottom:22px}
+    .it em{color:#800000;font-style:normal}
+    /* Introductory text on quiz start page — Poppins 15px */
+    .is-intro{font-family:'Poppins',sans-serif;font-size:15px;color:#6b5c4a;line-height:1.75;max-width:440px;margin:0 auto 20px}
+
+    /* ============================================================
+       Maroon-red CTA Button To P3 Website
+       ============================================================ */
+
+    /* Outer wrapper: transparent, carries drop-shadow depth */
+    .bs{
+      display:inline-block;
+      padding:0;
+      background:transparent;
+      border:none;
+      border-radius:100px;
+      cursor:pointer;
+      font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;
+      letter-spacing:.3px;
+      -webkit-appearance:none;appearance:none;
+      filter:drop-shadow(0 4px 0px rgba(58,0,16,.35)) drop-shadow(0 6px 16px rgba(58,0,16,.28));
+      transition:filter .17s,transform .17s;
+      -webkit-tap-highlight-color:transparent;
+      text-decoration:none;
+    }
+    /* Inner pill: maroon-red surface with soft top-light inset */
+    .bs-inner{
+      display:block;
+      padding:13px 38px;
+      border-radius:100px;
+      background:#7a1520;
+      color:#fff;
+      font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;
+      letter-spacing:.3px;
+      box-shadow:
+        inset 0 2px 4px rgba(255,255,255,.18),
+        inset 0 -3px 6px rgba(0,0,0,.18),
+        inset 0 0 0 1px rgba(0,0,0,.12);
+      transition:background .17s,box-shadow .17s;
+      white-space:nowrap;
+    }
+    .bs:hover{
+      transform:translateY(-2px);
+      filter:drop-shadow(0 6px 2px rgba(58,0,16,.3)) drop-shadow(0 10px 22px rgba(58,0,16,.32));
+    }
+    .bs:hover .bs-inner{background:#8e1a26}
+    .bs:active{
+      transform:translateY(1px);
+      filter:drop-shadow(0 2px 0px rgba(58,0,16,.28)) drop-shadow(0 3px 8px rgba(58,0,16,.22));
+    }
+    .bs:active .bs-inner{background:#6b1018}
+
+
+    /* ============================================================
+       Card Entrance Animation
+       ============================================================ */
+    .cin{animation:cin .42s cubic-bezier(.4,0,.2,1) both}
+    @keyframes cin{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ============================================================
+       Confetti Particles On Archetype Reveal
+       ============================================================ */
+    .cf{position:fixed;pointer-events:none;z-index:999;animation:cfd linear forwards}
+    @keyframes cfd{0%{transform:translateY(-10px) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(540deg);opacity:0}}
+
+    /* ============================================================
+       Responsive Mobile Adjustments (480px And Below)
+       ============================================================ */
+    @media(max-width:480px){body{padding:52px 12px 56px}.qb,.ib{padding:18px 16px 22px}.qt{font-size:14px}.it{font-size:20px}.qb{padding-top:12px}.qn{margin-bottom:3px}#ptrack{margin-bottom:10px}}
+
+/* Mobile (Landscape mode): on short/sideways phone screens, switch the question
+   card to a compact stacked layout (smaller image, tighter spacing) so
+   everything fits without scrolling. Only affects landscape phones —
+   desktop and portrait phones are untouched. */
+    @media(orientation:landscape) and (max-height:500px){
+      #qCard.qc-visible{
+        display:flex;flex-direction:column;align-items:stretch;gap:6px;
+        padding:10px 16px;
+        max-height:calc(100vh - 24px);
+        overflow-y:auto;
+      }
+      #qCard .qi-wrap{
+        width:100%;flex-shrink:0;
+        padding:0;
+        background:transparent;
+      }
+      #qCard .qi-img{
+        width:100%;height:auto;
+        max-width:100%;max-height:min(30vh,200px);
+        object-fit:contain;
+      }
+      #qCard .qb{
+        width:100%;
+        padding:0;
+        flex-shrink:0;
+      }
+      #qCard .qn{font-size:11px;margin-bottom:2px}
+      #qCard .qt{font-size:12.5px;line-height:1.32;margin-bottom:6px}
+      #qCard #ptrack{margin-bottom:5px}
+      #qCard .os{gap:5px}
+      #qCard .ob-inner{padding:7px 10px}
+    }
+
+/* Mobile (Landscape mode): shrink the results-page character image the same
+   way, on the same short/sideways screens. Kept separate from the
+   block above since it targets different elements (results page,
+   not the question page). */
+    @media(orientation:landscape) and (max-height:500px){
+      .r2-char-wrap{width:90.25px;height:90.25px}
+      .r2-char-img{width:90.25px;height:90.25px}
+      .r2-aura{top:24.23px;left:24.23px}
+    }
+
+
+    /* ============================================================
+       Archetype Results Page
+       ============================================================ */
+
+/* Grey band at the top of the results page: holds the "You are" label,
+   character illustration, badge, and archetype name */
+    .r2-hero{background:#757575;padding:9px 24px 22px;text-align:center;margin:-1px -1px 0;}
+    .r2-ya{text-align:center;font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#f8f1e3;margin-bottom:4px}
+
+    /* Image enlarged 88px -> 110px (+25%) per approved Option C; padding/font sizes
+       above and below tightened by an exactly offsetting amount so the hero band's
+       total height is unchanged (verified: 177.8px before and after).
+       Subsequently reduced 100px -> 95px (-5%) per approved Option A; aura glow
+       scaled down to match (46px -> 44px) and recentred for the smaller wrap.
+       Further reduced 95px -> 90.25px (-5% again, stacked) per follow-up request;
+       aura glow scaled to match (44px -> 41.8px) and recentred again. */
+    .r2-char-wrap{position:relative;width:90.25px;height:90.25px;margin:0 auto 0;overflow:hidden;border-radius:8px;}
+    .r2-char-img{position:relative;z-index:2;width:90.25px;height:90.25px;display:block;object-fit:contain;animation:charFloat 12s ease-in-out infinite;}
+    @keyframes charFloat{0%,100%{transform:translateY(0) scale(1.85)}50%{transform:translateY(-6px) scale(1.85)}}
+
+    /* Aura glow behind character — recentred for the 90.25px wrap (-5% size reduction, stacked) */
+    .r2-aura{position:absolute;width:41.8px;height:41.8px;border-radius:50%;top:24.23px;left:24.23px;filter:blur(16px);opacity:.6;animation:auraP 6s ease-in-out infinite;z-index:0;transition:background .4s}
+    @keyframes auraP{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.55;transform:scale(1.2)}}
+
+    .r2-badge{display:inline-block;font-size:8px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:1px}
+    .r2-name{font-family:'Poppins',sans-serif;font-size:18px;line-height:1.2;color:#fff;word-break:break-word}
+
+    /* ============================================================
+       Results Page: Your Strengths In Action
+       Two competency rows, each grounded in an actual quiz answer
+       mapped to this archetype (see AR.competencies), showing how
+       that instinct translates into a named procurement competency.
+       Replaces the former 3-row generic trait/example table.
+       ============================================================ */
+    .r2-strengths-wrap{padding:16px 22px 0}
+    .r2-sec-hd{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;text-align:center;margin-bottom:9px;}
+    .r2-comp-row{display:flex;gap:8px;margin-bottom:12px}
+    .r2-comp-row:last-child{margin-bottom:0}
+    .r2-comp-num{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;flex-shrink:0;line-height:1.2}
+    .r2-comp-name{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;margin-bottom:3px}
+    .r2-comp-text{font-family:'Poppins',sans-serif;font-size:12px;color:#3d2b1f;line-height:1.5}
+
+    /* ============================================================
+       Results Page: What Government Procurement Is About
+       Shared explainer content, identical across all archetypes.
+       Only the header colour and the "Did you know?" label are
+       tinted per archetype (set inline via JS).
+       ============================================================ */
+    .r2-procurement{padding:16px 22px 18px}
+    .r2-proc-intro{font-family:'Poppins',sans-serif;font-size:12px;color:#3d2b1f;line-height:1.55;margin-bottom:14px}
+    .r2-proc-strip-label{font-family:'Poppins',sans-serif;font-size:12px;color:#3d2b1f;margin-bottom:6px}
+    .r2-proc-strip{display:flex;align-items:center;justify-content:space-between;position:relative;margin-bottom:6px;padding:0 2px}
+    .r2-proc-strip-line{position:absolute;top:5px;left:12px;right:12px;height:1px;background:#ddd;z-index:0}
+    .r2-proc-stage{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:25%;font-family:'Poppins',sans-serif;font-size:12px;color:#3d2b1f;text-align:center;line-height:1.3}
+    .r2-proc-dot{display:block;width:10px;height:10px;border-radius:50%;background:#cbb894;margin-bottom:4px}
+    .r2-proc-fact{font-family:'Poppins',sans-serif;font-size:12px;color:#3d2b1f;line-height:1.5;margin:12px 0 0;padding:8px 0 0;border-top:1px solid #f0ece2}
+
+    /* ============================================================
+       Results Page: Where This Could Take You
+       Small closing caption above the CTA row; shared static copy,
+       identical for every archetype.
+       ============================================================ */
+    .r2-take-you{padding:10px 22px 6px}
+    .r2-take-you-hd{font-family:'Poppins',sans-serif;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#b8a88f;margin-bottom:4px}
+    .r2-take-you-body{font-family:'Poppins',sans-serif;font-size:12px;color:#3d2b1f;line-height:1.5}
+
+    /* Disclaimer footnote — small print, unobtrusive */
+    .r2-disclaimer{font-family:'Poppins',sans-serif;font-size:11px;font-style:italic;color:#6b5d4f;text-align:center;line-height:1.5;padding:0 22px;margin-top:2px;display:flex;align-items:flex-start;justify-content:center;gap:5px}
+    .r2-disclaimer svg{width:13px;height:13px;flex-shrink:0;margin-top:2px}
+
+    /* ============================================================
+       Results Page: P3 Card + Secondary Action Buttons
+       ============================================================ */
+    .r2-actions-wrap{background:#f3ede0;border-top:1px solid #e8ddd0;padding:14px 22px 16px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;}
+    .r2-p3-card{display:inline-flex;align-items:center;gap:10px;border-radius:100px;padding:8px 8px 8px 16px;text-decoration:none;cursor:pointer;border:none;font-family:'Poppins',sans-serif;background:#800000;transition:transform .15s ease,box-shadow .15s ease;}
+    .r2-p3-card:hover{transform:translateY(-2px);box-shadow:0 4px 10px rgba(58,0,16,.28);}
+    .r2-p3-card:active{transform:translateY(0);box-shadow:0 2px 4px rgba(58,0,16,.2);}
+    .r2-p3-eyebrow{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:1px;text-align:left;color:rgba(255,255,255,.7);}
+    .r2-p3-title{font-size:12px;font-weight:700;text-align:left;color:#fff;}
+    .r2-p3-arrow{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+
+    .r2-secondary-btn{background:#fff;border:1px solid #e0d6c2;color:#5a4632;border-radius:100px;padding:8px 16px;font-size:9.5px;font-weight:600;white-space:nowrap;cursor:pointer;font-family:'Poppins',sans-serif;transition:background .15s,transform .15s ease,box-shadow .15s ease}
+    .r2-secondary-btn:hover{background:#f8f4ea;transform:translateY(-2px);box-shadow:0 4px 10px rgba(90,70,50,.18);}
+    .r2-secondary-btn:active{background:#efe8d8;transform:translateY(0);box-shadow:0 2px 4px rgba(90,70,50,.14);}
+
+    /* ============================================================
+       Sparkle Particles: Float up around character illustration
+       ============================================================ */
+    .spar{position:absolute;border-radius:50%;pointer-events:none;animation:sparF linear infinite}
+    @keyframes sparF{0%{opacity:0;transform:translateY(0) scale(0)}18%{opacity:.7}80%{opacity:.3}100%{opacity:0;transform:translateY(-44px) scale(1.4)}}
+
+    /* ============================================================
+       Results Page Mobile Overrides (480px And Below)
+       ============================================================ */
+    @media(max-width:480px){
+      .r2-hero{padding:6px 18px 19px}
+      .r2-name{font-size:16px}
+      .r2-ya{font-size:12px}
+      .r2-sec-hd{font-size:13px}
+      .r2-secondary-btn{font-size:9.5px;padding:9px 4px}
+      .r2-actions-wrap{flex-wrap:wrap}
+      .r2-actions-wrap .r2-p3-card{order:-1;width:100%;justify-content:center;margin-bottom:4px}
+      .r2-actions-wrap .r2-secondary-btn{flex:1}
+      .r2-char-wrap{width:88.35px;height:88.35px}
+      .r2-char-img{width:88.35px;height:88.35px}
+      .r2-aura{top:23.27px;left:23.27px}
+    }
+
+
+    /* ============================================================
+       Progress Tracker On Question Cards
+       ============================================================ */
+    #ptrack{display:flex;gap:7px;margin-bottom:14px}
+    .pts{flex:1;height:4px;border-radius:2px;background:rgba(0,0,0,.09);transition:background .35s}
+    .pts.done{background:linear-gradient(90deg,#800000,#DC143C)}
+    .pts.active{background:#fbbf24;animation:ptpulse 1s ease-in-out infinite alternate}
+    @keyframes ptpulse{from{opacity:.6}to{opacity:1}}
+
+/* Question Image Banner: all 5 source PNGs are the same 256x256
+   size, so setting a fixed height. Width
+   scales automatically, image stays centered. */
+    .qi-wrap{
+      width:100%;
+      background:transparent;
+      display:flex;
+      justify-content:center;
+      overflow:hidden;
+      padding-top:24px;
+    }
+    .qi-img{
+      width:auto;
+      height:334px;
+      display:block;
+      object-fit:contain;
+      /* height (not max-height) is used deliberately: the source PNGs are
+         256x256, and max-height alone cannot enlarge an image beyond its
+         natural size — only cap it. Setting height directly forces the
+         genuine upscale needed to make the artwork larger on screen.
+         max-width remains as a safety ceiling on narrow viewports so the
+         image can't force itself wider than the card comfortably allows.
+         transform:scale(1.1) crops a small amount of white space around
+         the artwork itself: the image is scaled up slightly within its
+         own footprint, and .qi-wrap's overflow:hidden clips the excess,
+         so the artwork fills a touch more of the frame without changing
+         the frame's own size. */
+      max-width:74%;
+      transform:scale(1.1);
+    }
+    @media(max-width:480px){
+      .qi-img{height:179px;max-width:78%}
+    }
+
+    /* ============================================================
+       Archetypes Poster Overlay Triggered By "Meet Fellow Travellers"
+       ============================================================ */
+    .poster-modal{
+      position:fixed;inset:0;z-index:1000;
+      background:rgba(20,12,6,.72);
+      display:none;
+      align-items:center;justify-content:center;
+      padding:24px;
+      overflow-y:auto;
+    }
+    .poster-modal.open{display:flex}
+    .poster-modal-inner{
+      position:relative;
+      max-width:560px;width:100%;
+      margin:auto;
+    }
+    .poster-modal-inner img{
+      display:block;width:100%;height:auto;
+      border-radius:14px;
+      box-shadow:0 12px 40px rgba(0,0,0,.4);
+    }
+    .poster-modal-close{
+      position:absolute;top:-16px;right:-16px;
+      width:36px;height:36px;border-radius:50%;
+      background:#800000;color:#fff;border:2px solid #fff;
+      font-size:18px;line-height:1;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 10px rgba(0,0,0,.3);
+      transition:transform .15s ease;
+    }
+    .poster-modal-close:hover{transform:scale(1.08)}
+    @media(max-width:480px){
+      .poster-modal{padding:16px}
+      .poster-modal-close{top:-12px;right:-4px;width:32px;height:32px;font-size:16px}
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       Background: Particle Container (Populated By JS Below)
+       ============================================================ -->
+  <div class="bgs" id="bgs"></div>
+
+
+  <div id="app">
+
+    <!-- ============================================================
+         Card 1: Quiz Start Page
+         ============================================================ -->
+    <div class="card" id="iCard">
+      <div class="sw">
+        <img class="si" src="Images/Quiz Start Page.png" alt="">
+        <div class="sovl"></div>
+      </div>
+      <div class="ib">
+        <!-- Quiz metadata pill: question count and time estimate -->
+        <div class="ik">5 Questions &nbsp;&middot;&nbsp; ~ 2 Minutes</div>
+        <!-- Quiz title -->
+        <h1 class="it">Which <em>Procurement Archetype</em><br>Are You?</h1>
+        <!-- Introductory text above start button -->
+        <p class="is-intro">Curious what kind of decision-maker you are? Take the Grand Food Bazaar Quiz to find out your personality.</p>
+        <!-- Start button -->
+        <button type="button" class="bs" onclick="startQuiz()"><span class="bs-inner">Find Out Now</span></button>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         Card 2: Question Card
+         ============================================================ -->
+    <div class="card" id="qCard" style="display:none">
+      <!-- Question image: PNG displayed at full card width, height proportional -->
+      <div class="qi-wrap">
+        <img class="qi-img" id="qImg" src="" alt="Question scene">
+      </div>
+      <div class="qb">
+        <!-- Back button (hidden on question 1) -->
+        <button type="button" class="back-btn hidden" id="backBtn" onclick="goBack()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Back
+        </button>
+        <!-- Question number label -->
+        <div class="qn" id="qn"></div>
+        <!-- Step progress track (filled by renderQ) -->
+        <div id="ptrack"></div>
+        <!-- Question text -->
+        <div class="qt" id="qt"></div>
+        <!-- Answer option buttons (filled by renderQ) -->
+        <div class="os" id="os"></div>
+      </div>
+    </div>
+
+
+    <!-- ============================================================
+         Archetype Results Page
+         ============================================================ -->
+    <div class="card" id="archetypeResultsPage" style="display:none">
+      <div class="rb">
+
+        <!-- Dark hero band: You are, character + aura, tag, name -->
+        <div class="r2-hero">
+          <div class="r2-ya">You are</div>
+          <div class="r2-char-wrap" id="charWrap">
+            <!-- Aura glow (colour set dynamically by showResult) -->
+            <div class="r2-aura" id="rAura"></div>
+            <!-- Archetype character image (src and alt set dynamically by showResult via ARCHETYPE_IMAGES, now Frame 7.png) -->
+            <img id="rCharImg" class="r2-char-img" src="" alt="">
+          </div>
+          <div class="r2-badge" id="r2Badge"></div>
+          <h2 class="r2-name" id="r2Name"></h2>
+        </div>
+
+        <!-- Your Strengths In Action: two competency rows (populated by
+             showResult from AR.competencies), each grounded in an actual
+             quiz answer mapped to this archetype. -->
+        <div class="r2-strengths-wrap">
+          <div class="r2-sec-hd" id="r2StrHd">Your Strengths In Action</div>
+          <div id="r2CompRows"></div>
+        </div>
+
+        <!-- What Government Procurement Is About: shared explainer content,
+             identical across all archetypes. Only the header colour and the
+             "Did you know?" label are tinted per archetype by showResult. -->
+        <div class="r2-procurement">
+          <div class="r2-sec-hd" id="r2ProcHd">What government procurement is about</div>
+          <div class="r2-proc-intro">Procurement is not just about buying things. It's about how the government delivers the public services and infrastructure Singaporeans rely on, responsibly and fairly.</div>
+          <div class="r2-proc-strip-label">It follows a set process:</div>
+          <div class="r2-proc-strip">
+            <div class="r2-proc-strip-line"></div>
+            <div class="r2-proc-stage"><span class="r2-proc-dot"></span>Sourcing</div>
+            <div class="r2-proc-stage"><span class="r2-proc-dot"></span>Evaluation</div>
+            <div class="r2-proc-stage"><span class="r2-proc-dot"></span>Approval</div>
+            <div class="r2-proc-stage"><span class="r2-proc-dot"></span>Contract mgmt</div>
+          </div>
+          <div class="r2-proc-fact"><strong id="r2DidYouKnow">Did you know?</strong> A S$6,000 purchase and a S$1 million tender follow completely different rules. The bigger the spend, the more scrutiny it gets.</div>
+        </div>
+
+        <!-- Where This Could Take You: small closing caption, shared static
+             copy, identical for every archetype. -->
+        <div class="r2-take-you">
+          <div class="r2-take-you-hd">Where this could take you</div>
+          <div class="r2-take-you-body">Procurement careers span General, domain-specific (Eg: Built Environment, ICT) and Shared Services tracks. Ask our team to find out more.</div>
+        </div>
+
+        <!-- P3 card + secondary actions -->
+        <div class="r2-actions-wrap">
+          <button type="button" class="r2-secondary-btn" onclick="resetQuiz()">Retake quest</button>
+          <a href="https://www.mof.gov.sg/careers/procurement-professional-programme/" class="r2-p3-card" id="r2P3Card" target="_blank" rel="noopener noreferrer">
+            <div>
+              <div class="r2-p3-eyebrow" id="r2P3Eyebrow">Take the next step</div>
+              <div class="r2-p3-title" id="r2P3Title">Find out more about P&#179;</div>
+            </div>
+            <div class="r2-p3-arrow" id="r2P3Arrow">&#8594;</div>
+          </a>
+          <button type="button" class="r2-secondary-btn" onclick="openPosterModal()">Meet Fellow Archetypes</button>
+        </div>
+
+        <p class="r2-disclaimer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="11"></line><circle cx="12" cy="7.5" r="0.6" fill="currentColor" stroke="none"></circle></svg><span>This quiz is intended for entertainment and self-reflection, not a scientific or psychometric assessment.</span></p>
+
+      </div>
+    </div>
+
+  </div><!-- /#app -->
+
+
+  <script>
+
+    // ============================================================
+    // Background Particles
+    // ============================================================
+    (function(){
+      var b = document.getElementById('bgs');
+      var c = ['#7a1a1a','#a01c2c','#c41828','#8b0000','#b22020','#991414','#7c1212'];
+      for (var i = 0; i < 16; i++) {
+        var d = document.createElement('div');
+        d.className = 'bgi';
+        var s = 38 + Math.random() * 92;
+        d.style.cssText =
+          'width:' + s + 'px;height:' + s + 'px;left:' + (Math.random() * 100) + '%;' +
+          'background:' + c[i % c.length] + ';' +
+          'animation-duration:' + (18 + Math.random() * 22) + 's;' +
+          'animation-delay:-' + (Math.random() * 18) + 's;' +
+          'border-radius:' + (Math.random() > .5 ? '50%' : '22%');
+        b.appendChild(d);
+      }
+    })();
+
+
+    // ============================================================
+    // Vertical Centering: keeps the visible card centered in the window.
+    // - New question / results / back / retake: recalculate centering AND
+    //   scroll to top, so the new card always starts fully in view.
+    // - Window resize: recalculate centering only, don't touch scroll
+    //   position (so we don't yank the screen if the user scrolled on purpose).
+    // - On question cards, if the card would be too tall for the screen
+    //   (e.g. small laptop windows), the question image shrinks just enough
+    //   to avoid scrolling — text and buttons never shrink, only the image,
+    //   and never below a minimum size (smaller minimum on landscape phones,
+    //   since they have less room to begin with).
+    // - If a card is still too tall even at the image's smallest size, it
+    //   falls back to normal top-aligned scrolling instead of ever being
+    //   positioned off-screen.
+    // ============================================================
+    (function(){
+      var appEl = document.getElementById('app');
+      if (!appEl) return;
+      var lastHeight = null;
+      var MIN_IMG_HEIGHT = 140; // portrait/desktop floor: never shrink the question image below this
+      var MIN_IMG_HEIGHT_LANDSCAPE = 70; // landscape floor: shorter, since landscape phones have far less
+                                          // total height to begin with — keeping the 140px portrait floor
+                                          // here would force scrolling on the shortest landscape devices,
+                                          // which the no-scroll requirement for that layout takes priority over
+      var FIT_SAFETY_BUFFER = 20; // extra px of margin so rounding never leaves a sliver of unwanted scroll
+
+      function isLandscapePhone() {
+        return window.matchMedia('(orientation:landscape) and (max-height:500px)').matches;
+      }
+
+      function availableSpace() {
+        var bodyStyle = getComputedStyle(document.body);
+        var bodyPadTop = parseFloat(bodyStyle.paddingTop) || 0;
+        var bodyPadBottom = parseFloat(bodyStyle.paddingBottom) || 0;
+        return window.innerHeight - bodyPadTop - bodyPadBottom;
+      }
+
+      // Shrinks the question image, if needed, so the question card
+      // fits within the available viewport height. Resets the image
+      // to its normal CSS-defined size first, so this is always
+      // measuring against the true default rather than compounding
+      // a previous shrink.
+      function fitQuestionImage() {
+        var qImg = document.getElementById('qImg');
+        var qCard = document.getElementById('qCard');
+        if (!qImg || !qCard || qCard.style.display === 'none') return;
+
+        qImg.style.height = ''; // revert to CSS default before measuring
+        var scaleFactor = 1.1; // matches qi-img's transform:scale(1.1)
+
+        // Up to two passes: the first shrink is based on the original
+        // (unshrunk) measurements, and a small residual mismatch can
+        // remain afterwards due to rounding; a second pass corrects
+        // for that remainder. Two passes is enough in practice since
+        // each pass only needs to close a small leftover gap, not
+        // redo the full calculation.
+        for (var pass = 0; pass < 2; pass++) {
+          var cardHeight = qCard.getBoundingClientRect().height;
+          var overflow = cardHeight - availableSpace() + FIT_SAFETY_BUFFER;
+          if (overflow <= 0) break; // fits now, nothing more to do
+
+          var floor = isLandscapePhone() ? MIN_IMG_HEIGHT_LANDSCAPE : MIN_IMG_HEIGHT;
+          var currentCssHeight = qImg.getBoundingClientRect().height / scaleFactor;
+          var targetCssHeight = currentCssHeight - (overflow / scaleFactor);
+          if (targetCssHeight < floor) { qImg.style.height = floor + 'px'; break; }
+          qImg.style.height = targetCssHeight + 'px';
+        }
+      }
+
+      function applyMargin() {
+        fitQuestionImage();
+        var contentHeight = appEl.getBoundingClientRect().height;
+        var slack = availableSpace() - contentHeight;
+        var topMargin = slack > 0 ? slack / 2 : 0;
+        appEl.style.marginTop = topMargin + 'px';
+        return contentHeight;
+      }
+
+      // Card-change trigger: recalculate margin and reset scroll.
+      function recentreOnCardChange() {
+        applyMargin();
+        window.scrollTo(0, 0);
+      }
+
+      // Resize trigger: recalculate margin only, scroll untouched.
+      function recentreOnResize() {
+        applyMargin();
+      }
+
+      // ResizeObserver fires whenever #app's rendered size changes —
+      // this covers question swaps, results reveal, and images
+      // finishing load, all of which are genuine "new card" moments
+      // in this single-page quiz, so treating every size change as
+      // a card change (not a resize) is correct here.
+      if (typeof ResizeObserver !== 'undefined') {
+        var ro = new ResizeObserver(function(){
+          var h = appEl.getBoundingClientRect().height;
+          if (h !== lastHeight) {
+            lastHeight = h;
+            recentreOnCardChange();
+          }
+        });
+        ro.observe(appEl);
+      }
+
+      window.addEventListener('resize', recentreOnResize);
+
+      // Initial position on page load.
+      lastHeight = applyMargin();
+
+      // Exposed so renderQ() can re-run the fit/centre pass once a newly
+      // assigned question image has actually finished loading — img.src
+      // being set does not mean the new pixels are decoded and ready to
+      // measure yet, so without this hook fitQuestionImage() above keeps
+      // measuring the previous image's box until some later, unrelated
+      // resize happens to fire.
+      window.recentreApp = recentreOnCardChange;
+    })();
+
+
+    // ============================================================
+    // Question Data: 5 Questions, 3 Options Each
+    //
+    // Archetype Indices: 0 = The Strategist, 1 = The Dealmaker, 2 = The Truthseeker
+    // Scoring: Each Option Maps To Exactly One Archetype (+1 point)
+    // Maximum Possible Score Per Archetype: 5 Points
+    //
+    // Q1 (Bazaar Entrance):       A -> Strategist+1 | B -> Dealmaker+1 | C -> Truthseeker+1
+    // Q2 (Food Stalls):        A -> Truthseeker+1 | B -> Dealmaker+1 | C -> Strategist+1
+    // Q3 (Coffee Stall):    A -> Truthseeker+1 | B -> Dealmaker+1 | C -> Strategist+1
+    // Q4 (Coffee Spill): A -> Strategist+1 | B -> Dealmaker+1 | C -> Truthseeker+1
+    // Q5 (Bazaar Exit):      A -> Strategist+1 | B -> Dealmaker+1 | C -> Truthseeker+1
+    // ============================================================
+    var QS = [
+
+      // ── Q1: First Instinct In An Unfamiliar Environment ──────────
+      {
+        sc:'Bazaar Entrance',
+        q:"You've just stepped into the Grand Food Bazaar — it's crowded, loud, and a little overwhelming. What do you do first?",
+        opts:[
+          {l:'A', t:'Observe how things are flowing.', sc:{0:1}},
+          {l:'B', t:'Talk to someone at the information counter to understand what is going on.',  sc:{1:1}},
+          {l:'C', t:'Look for an information board or guide to plan your route.',                  sc:{2:1}}
+        ]
+      },
+
+      // ── Q2: Evaluating And Choosing Between Options ───────────────
+      {
+        sc:'Food Stalls',
+        q:'Your stomach started to growl. You look at your watch and it\'s 3pm. There are 3 snack stalls that caught your eye.',
+        opts:[
+          {l:'A', t:"Go with the stall with the longest queue.",          sc:{2:1}},
+          {l:'B', t:'Ask around before deciding.',     sc:{1:1}},
+          {l:'C', t:'Assess each stall individually before choosing the best overall value.',     sc:{0:1}}
+        ]
+      },
+
+      // ── Q3: Risk-taking When A Gamble Is Offered ─────────
+      {
+        sc:'Coffee Stall',
+        q:'You spot an award-winning specialty coffee stall hosting a Taste Challenge. A tasting flight of 3 pour-overs originally cost $20. However, if you guess all 3 beans correctly, you get a full refund — plus a chance to win a limited edition espresso machine worth $5,000. What do you do?',
+        opts:[
+          {l:'A', t:'Play it safe. Pay $20 and skip the challenge.',  sc:{2:1}},
+          {l:'B', t:"Talk to previous participants to get a better sense of your odds before deciding.",     sc:{1:1}},
+          {l:'C', t:"Take on the challenge. A $20 refund and a shot at the prize seems worth it.",                 sc:{0:1}}
+        ]
+      },
+
+      // ── Q4: Reacting To An Unplanned Personal Mishap ───────────
+      {
+        sc:'Coffee Spill',
+        q:'You accidentally bump into someone, spilling their coffee. What is your immediate response?',
+        opts:[
+          {l:'A', t:'Apologise and help clean up the mess.',          sc:{0:1}},
+          {l:'B', t:'Apologise and offer to pay for a new cup of coffee.',  sc:{1:1}},
+          {l:'C', t:"Apologise and ensure that they are okay before you head off.", sc:{2:1}}
+        ]
+      },
+
+      // ── Q5: Reflection On Personal Values And Identity ──────────
+      {
+        sc:'Bazaar Exit',
+        q:'You leave the Grand Food Bazaar, thinking about the choices you made along the way. What best describes your approach?',
+        opts:[
+          {l:'A', t:'I learn best by reading the situation and committing to a decisive call.',          sc:{0:1}},
+          {l:'B', t:'I learn best by talking to people and picking up on what\'s happening around me.',          sc:{1:1}},
+          {l:'C', t:"I learn best by doing things properly and for the right reasons.",              sc:{2:1}}
+        ]
+      }
+
+    ];
+
+
+    // ============================================================
+    // Archetype Data: The Strategist (0), The Dealmaker (1), The Truthseeker (2)
+    // Each object contains:
+    //   n               - archetype name (rendered: results page name + image alt text)
+    //   sub             - subtitle / tag line (rendered: results page badge)
+    //   c               - primary colour (hex) (rendered: section headers, aura fallback, confetti)
+    //   lt              - light tint background colour (rendered: results page badge colour)
+    //   auraColor       - optional override for aura background colour (falls back to c if absent) (rendered)
+    //   competencies    - 2 {name, text} pairs shown in Your Strengths In Action.
+    //                      Each "text" is grounded in an actual quiz answer option
+    //                      mapped to this archetype, translated into a description
+    //                      of how that instinct shows up as the named competency.
+    // ============================================================
+    var AR = [
+      // Index 0: The Strategist
+      {
+        n:'The Strategist', sub:'Judgement · Foresight · Precision',
+        c:'#1d4ed8', lt:'#eff6ff',
+        competencies:[
+          {name:'Policy &amp; Risk Management', text:"You size up a risk before committing, rather than avoiding it altogether or diving in blind, the same judgement needed when deciding what risk is worth taking."},
+          {name:'Procurement Excellence &amp; Innovation', text:'You compare every option before settling on the best overall value, not just the cheapest one, exactly how better ways of doing things get found.'}
+        ]
+      },
+      // Index 1: The Dealmaker
+      {
+        n:'The Dealmaker', sub:'Partnership · Influence · Rapport',
+        c:'#946200', lt:'#FFD96B',
+        competencies:[
+          {name:'Procurement Excellence &amp; Innovation', text:'You ask around and gather different views before deciding, the same instinct that turns feedback into a genuinely better process.'},
+          {name:'Business Partnership', text:"You're quick to approach someone directly rather than figure things out alone, exactly the instinct that builds the working relationships procurement depends on."}
+        ]
+      },
+      // Index 2: The Truthseeker
+      {
+        n:'The Truthseeker', sub:'Integrity · Compliance · Accountability',
+        c:'#059669', lt:'#ecfdf5',
+        auraColor:'#34D399',
+        competencies:[
+          {name:'Policy &amp; Risk Management', text:"You'll choose the safer, better-tested option over an untested gamble, the same caution that spots risk early and avoids unnecessary shortcuts."},
+          {name:'Business Partnership', text:'You make sure people are genuinely okay, not just apologised to, exactly the follow-through that makes someone a partner others can rely on.'}
+        ]
+      }
+    ];
+
+
+    // ============================================================
+    // Archetype Image Mapping
+    // Static Image Only: Frame-cycling Animation Removed Per Design Update
+    // ============================================================
+    var ARCHETYPE_IMAGES = {
+      0: 'Images/Archetypes/The Strategist/Frame 7.png',
+      1: 'Images/Archetypes/The Dealmaker/Frame 7.png',
+      2: 'Images/Archetypes/The Truthseeker/Frame 7.png'
+    };
+
+    // ============================================================
+    // Question Image Mapping
+    // ============================================================
+    var QUESTION_IMAGES = {
+      'Bazaar Entrance':    'Images/Questions/Bazaar Entrance.png',
+      'Food Stalls':        'Images/Questions/Food Stalls.png',
+      'Coffee Stall':    'Images/Questions/Coffee Stall.png',
+      'Coffee Spill': 'Images/Questions/Coffee Spill.png',
+      'Bazaar Exit':      'Images/Questions/Bazaar Exit.png'
+    };
+
+    // ============================================================
+    // Image Preloader
+    // Fetches all question images into the browser cache immediately
+    // on page load, before the user starts the quiz. By the time
+    // they reach any question, the image is already cached and
+    // swaps in instantly.
+    // Uses plain Image() objects so no markup or layout is affected.
+    // ============================================================
+    (function(){
+      for (var key in QUESTION_IMAGES) {
+        if (QUESTION_IMAGES.hasOwnProperty(key)) {
+          var img = new Image();
+          img.src = QUESTION_IMAGES[key];
+        }
+      }
+    })();
+
+
+    // ============================================================
+    // Quiz State
+    // answers - array of selected option indices (null = unanswered)
+    // cur     - current question index (0-based)
+    // busy    - debounce flag to prevent double-clicks during transitions
+    // ============================================================
+    var answers, cur, busy;
+
+    // ============================================================
+    // Scoring
+    // Tallies points across all answered questions.
+    // Each answer maps to exactly one archetype: +1 point.
+    // Maximum possible score per archetype: 5 points.
+    // Returns an array [strategistScore, dealmakerScore, guardianScore].
+    // ============================================================
+    function getScores() {
+      var s = [0, 0, 0];
+      answers.forEach(function(ai, qi) {
+        if (ai !== null) {
+          var sc = QS[qi].opts[ai].sc;
+          for (var k in sc) { s[+k] += sc[k]; }
+        }
+      });
+      return s;
+    }
+
+
+    // ============================================================
+    // Progress Track Update
+    // ============================================================
+    function upProg() {}
+
+
+    // ============================================================
+    // Confetti
+    // ============================================================
+    function confetti(mc) {
+      var pal = [mc, '#fbbf24', '#d97706', '#1e3a5f', '#92400e', '#f97316', '#fff8ec'];
+      for (var i = 0; i < 68; i++) {
+        (function(i) {
+          setTimeout(function() {
+            var el = document.createElement('div');
+            el.className = 'cf';
+            var s = 5 + Math.random() * 9;
+            el.style.cssText =
+              'left:' + (8 + Math.random() * 84) + '%;top:0;' +
+              'width:' + s + 'px;height:' + s + 'px;' +
+              'background:' + pal[Math.floor(Math.random() * pal.length)] + ';' +
+              'border-radius:' + (Math.random() > .5 ? '50%' : '3px') + ';' +
+              'animation-duration:' + (1.8 + Math.random() * 2) + 's;' +
+              'animation-delay:' + (Math.random() * .7) + 's';
+            document.body.appendChild(el);
+            setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 5000);
+          }, i * 18);
+        })(i);
+      }
+    }
+
+
+    // ============================================================
+    // Start Quiz
+    // Resets state, hides intro card, shows question card.
+    // ============================================================
+    function startQuiz() {
+      answers = new Array(QS.length).fill(null);
+      cur = 0;
+      busy = false;
+      document.getElementById('iCard').style.display = 'none';
+      var qc = document.getElementById('qCard');
+      qc.style.display = '';
+      qc.classList.add('qc-visible');
+      qc.style.opacity = '1';
+      qc.style.transform = '';
+      qc.classList.remove('cin');
+      qc.offsetHeight; // force reflow to restart animation
+      qc.classList.add('cin');
+      upProg();
+      renderQ();
+    }
+
+
+    // ============================================================
+    // Render Question
+    // Populates the question card with data for the current question.
+    // Rebuilds the progress track and staggered answer option buttons.
+    // ============================================================
+    function renderQ() {
+      var q = QS[cur];
+
+      // Update question scene image. The image's bounding box still
+      // reflects the *previous* image until the new file actually
+      // finishes loading/decoding, so the resize-driven fit/centre pass
+      // (see window.recentreApp) is re-run on its 'load' event rather
+      // than relying on a later, unrelated resize to catch up — that gap
+      // was the cause of the image appearing to lag one question behind.
+      var qImg = document.getElementById('qImg');
+      if (qImg && QUESTION_IMAGES[q.sc]) {
+        qImg.onload = function() {
+          if (typeof window.recentreApp === 'function') window.recentreApp();
+        };
+        qImg.src = QUESTION_IMAGES[q.sc];
+        qImg.alt = q.sc || 'Question scene'; // sc key matches filename (e.g. "Food Stalls", "Bazaar Exit")
+        // If the image was already cached, 'load' has already fired (or
+        // never will for this src) by the time we get here — run the fit
+        // pass immediately in that case instead of waiting for an event
+        // that already happened.
+        if (qImg.complete) qImg.onload();
+      }
+
+      // Update question number label
+      document.getElementById('qn').textContent = 'Question ' + (cur + 1) + ' of ' + QS.length;
+
+      // Update question text
+      document.getElementById('qt').textContent = q.q;
+
+      // Show/hide back button
+      var bb = document.getElementById('backBtn');
+      if (cur > 0) { bb.classList.remove('hidden'); } else { bb.classList.add('hidden'); }
+
+      // Rebuild progress track dots
+      var pt = document.getElementById('ptrack');
+      pt.innerHTML = '';
+      for (var pi = 0; pi < QS.length; pi++) {
+        var ps = document.createElement('div');
+        ps.className = 'pts' + (pi < cur ? ' done' : pi === cur ? ' active' : '');
+        pt.appendChild(ps);
+      }
+
+      // Rebuild answer option buttons (staggered entrance animation)
+      var os = document.getElementById('os');
+      os.innerHTML = '';
+      q.opts.forEach(function(o, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'ob' + (answers[cur] === i ? ' sel' : '');
+        b.innerHTML = '<div class="ob-inner"><span class="ol">' + o.l + '</span><span>' + o.t + '</span></div>';
+        b.onclick = function() { pick(i, b); };
+        os.appendChild(b);
+        setTimeout(function() { b.classList.add('in'); }, 300 + i * 65);
+      });
+    }
+
+
+    // ============================================================
+    // Pick Answer
+    // Records the selected answer, then advances to the next question
+    // or triggers showResult() if all questions are answered.
+    // ============================================================
+    function pick(optIdx, btn) {
+      if (busy) return;
+      busy = true;
+
+      // Highlight selected option
+      var btns = document.querySelectorAll('#os .ob');
+      for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('sel'); }
+      btn.classList.add('sel');
+      answers[cur] = optIdx;
+
+      setTimeout(function() {
+        cur++;
+        upProg();
+        if (cur < QS.length) {
+          // Animate card out, swap question, animate back in
+          var qc = document.getElementById('qCard');
+          qc.style.transition = 'opacity .3s,transform .3s';
+          qc.style.opacity = '0';
+          qc.style.transform = 'translateY(-14px)';
+          setTimeout(function() {
+            qc.style.opacity = '1';
+            qc.style.transform = '';
+            renderQ();
+            busy = false;
+          }, 340);
+        } else {
+          showResult();
+        }
+      }, 380);
+    }
+
+
+    // ============================================================
+    // Go Back
+    // Decrements current question index and re-renders the question card.
+    // ============================================================
+    function goBack() {
+      if (cur <= 0 || busy) return;
+      busy = true;
+      var qc = document.getElementById('qCard');
+      qc.style.transition = 'opacity .28s,transform .28s';
+      qc.style.opacity = '0';
+      qc.style.transform = 'translateY(14px)';
+      setTimeout(function() {
+        cur--;
+        upProg();
+        qc.style.opacity = '1';
+        qc.style.transform = '';
+        renderQ();
+        setTimeout(function() { busy = false; }, 320);
+      }, 300);
+    }
+
+
+    // ============================================================
+    // Show Result
+    // Calculates scores, identifies the winning archetype, populates
+    // the Archetype Results Page, then transitions directly to it.
+    // ============================================================
+    function showResult() {
+      var scores = getScores();
+      var mx = Math.max.apply(null, scores);
+      var ti = scores.indexOf(mx);
+      var a = AR[ti];
+
+      // Set aura colour — uses a dedicated auraColor field if present (currently only
+      // set for The Truthseeker, for visibility against the dark hero band), otherwise
+      // falls back to the main accent colour a.c as before.
+      document.getElementById('rAura').style.background = a.auraColor || a.c;
+
+      // Set archetype character image — Frame 1.png displayed statically
+      var charImg = document.getElementById('rCharImg');
+      charImg.src = ARCHETYPE_IMAGES[ti];
+      charImg.alt = a.n;
+
+      // Archetype badge (subtitle / tag line), coloured against the dark hero band
+      var badge = document.getElementById('r2Badge');
+      badge.textContent = a.sub;
+      badge.style.color = a.lt;
+
+      // Archetype name
+      document.getElementById('r2Name').textContent = a.n;
+
+      // Section header — tinted with archetype colour
+      document.getElementById('r2StrHd').style.color = a.c;
+
+      // Your Strengths In Action — two numbered competency rows, numeral
+      // shown as a pale tint of the archetype colour (25% opacity via hex
+      // alpha suffix), competency name in the full archetype colour.
+      document.getElementById('r2CompRows').innerHTML = a.competencies.map(function(comp, i) {
+        return '<div class="r2-comp-row"><div class="r2-comp-num" style="color:' + a.c + '40">0' + (i + 1) + '</div><div><div class="r2-comp-name" style="color:' + a.c + '">' + comp.name + '</div><div class="r2-comp-text">' + comp.text + '</div></div></div>';
+      }).join('');
+
+      // What Government Procurement Is About — header and "Did you know?"
+      // label tinted with archetype colour; the rest of the section is
+      // shared static copy already in the HTML.
+      document.getElementById('r2ProcHd').style.color = a.c;
+      document.getElementById('r2DidYouKnow').style.color = a.c;
+
+      // P3 card colours are static MOF maroon (set in CSS), not archetype-specific
+
+      // Transition: hide question card, show archetype results page directly
+      var qc = document.getElementById('qCard');
+      qc.style.transition = 'opacity .3s,transform .3s';
+      qc.style.opacity = '0';
+      qc.style.transform = 'translateY(-14px)';
+      setTimeout(function() {
+        qc.style.display = 'none';
+        qc.classList.remove('qc-visible');
+        var gc = document.getElementById('archetypeResultsPage');
+        gc.style.display = 'block';
+        gc.classList.remove('cin');
+        gc.offsetHeight; // force reflow
+        gc.classList.add('cin');
+        confetti(a.c);
+        busy = false;
+      }, 360);
+    }
+
+
+
+
+    // ============================================================
+    // Reset Quiz
+    // Clears all state and returns to the intro card.
+    // ============================================================
+    function resetQuiz() {
+      answers = new Array(QS.length).fill(null);
+      cur = 0;
+      busy = false;
+      document.getElementById('archetypeResultsPage').style.display = 'none';
+      var ic = document.getElementById('iCard');
+      ic.style.display = 'block';
+      ic.classList.remove('cin');
+      ic.offsetHeight; // force reflow
+      ic.classList.add('cin');
+    }
+
+    // ============================================================
+    // Archetypes Poster Overlay Triggered By "Meet Fellow Archetypes"
+    // ============================================================
+    function openPosterModal() {
+      document.getElementById('posterModal').classList.add('open');
+    }
+    function closePosterModal() {
+      document.getElementById('posterModal').classList.remove('open');
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePosterModal();
+    });
+
+
+    // ============================================================
+    // Floating Sparkle Particles Around Archetype Illustration
+    // ============================================================
+    (function(){
+      var wrap = document.getElementById('charWrap');
+      if (!wrap) return;
+      var cols = ['#fbbf24','#d97706','#fef3c7','#f59e0b'];
+      for (var i = 0; i < 5; i++) {
+        var p = document.createElement('div');
+        p.className = 'spar';
+        var s = 3 + Math.random() * 3;
+        p.style.cssText =
+          'width:' + s + 'px;height:' + s + 'px;' +
+          'background:' + cols[i % cols.length] + ';' +
+          'left:' + (18 + Math.random() * 66) + '%;' +
+          'top:' + (24 + Math.random() * 44) + '%;' +
+          'animation-duration:' + (2.2 + Math.random() * 2.4) + 's;' +
+          'animation-delay:-' + (Math.random() * 2.4) + 's;' +
+          'opacity:0';
+        wrap.appendChild(p);
+      }
+    })();
+
+  </script>
+  <!-- Archetypes poster modal — opened by "Meet Fellow Archetypes" button -->
+  <div class="poster-modal" id="posterModal" onclick="if(event.target===this) closePosterModal()">
+    <div class="poster-modal-inner">
+      <button type="button" class="poster-modal-close" onclick="closePosterModal()" aria-label="Close">&#10005;</button>
+      <img src="Images/Archetypes_Poster.png" alt="About the Archetypes: The Strategist, The Dealmaker, and The Truthseeker">
+    </div>
+  </div>
+
+</body>
+</html>
